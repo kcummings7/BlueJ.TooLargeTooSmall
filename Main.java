@@ -2,32 +2,48 @@
 /**
  * Write a description of class Main here.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author (Katherine Cummings)
+ * @version (2/5/19)
  */
-public class Main
-{
-    // instance variables - replace the example below with your own
-    private int x;
-
-    /**
-     * Constructor for objects of class Main
-     */
-    public Main()
-    {
-        // initialise instance variables
-        x = 0;
+import java.util.Scanner;
+import java.util.Random;
+public class Main{
+    Random num = new Random();
+    int secretNumber = num.nextInt(100)+1;
+    int counter = 0;
+    int lastGuess;
+    Scanner input = new Scanner(System.in);
+    public Main(){
+        checkGuess();
     }
 
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
+    public void checkGuess(){
+        System.out.println("Guess the secret number!");
+        int checking = Integer.parseInt(input.nextLine());
+        if(checking<secretNumber){
+            System.out.println("Too small!");
+            if(checking!=lastGuess){
+                counter++;
+            }
+            lastGuess=checking;
+            checkGuess();
+        }
+        else if(checking>secretNumber){
+            System.out.println("Too large!");
+            if(checking!=lastGuess){
+                counter++;
+            }
+            lastGuess=checking;
+            checkGuess();
+        }
+        else if(checking==secretNumber){
+            counter++;
+            System.out.println("Exactly right! It took you "+counter+" guesses!");
+        }
+        else{
+            System.out.println("Error!");
+            checkGuess();
+        }
+        
     }
 }
